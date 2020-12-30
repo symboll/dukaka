@@ -93,7 +93,8 @@ Page({
       name: 'music',
       data: {
         start,
-        count: 15
+        count: 15,
+        $url: "playlist"
       }
     }).then(res => {
       this.setData({
