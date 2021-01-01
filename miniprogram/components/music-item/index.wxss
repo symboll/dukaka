@@ -1,1 +1,38 @@
-/* components/music-item/index.wxss */
+.musicitem-container{
+
+  display: flex;
+  padding: 14rpx 20rpx;
+  align-items: center;
+}
+
+.musicitem-index {
+  color: #888;
+  font-size: 34rpx;
+  width: 80rpx;
+}
+
+.musicitem-info {
+  flex-grow: 1;
+  width: 0
+}
+
+.musicitem-name {
+  font-size:34rpx;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 10rpx;
+}
+
+.musciitem-alia {
+  color: #888;
+}
+.musicitem-singer {
+  font-size: 24rpx;
+  color: #888;
+}
+
+.playing view, .playing text{
+  color: #d43c33;
+}

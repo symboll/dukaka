@@ -8,6 +8,5 @@
 </view>
 
 
-<block wx:for="{{ musiclist }}" wx:key="url">
-  <music-item />
-</block>
+
+<music-item  musiclist="{{ musiclist }}" />
