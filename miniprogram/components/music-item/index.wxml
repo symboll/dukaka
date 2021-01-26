@@ -2,7 +2,9 @@
 <block wx:for="{{ musiclist }}" wx:key="id">
   <view class="musicitem-container {{ item.id === musicid ? 'playing': '' }}" 
     bind:tap="handleSelected" 
-    data-musicId="{{ item.id }}">
+    data-musicId="{{ item.id }}"
+    data-index="{{index}}"
+    >
     <view class="musicitem-index">{{ index + 1 }}</view>
     <view class="musicitem-info">
       <view class="musicitem-name">

@@ -40,6 +40,7 @@
   "libVersion": "2.14.0",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "condition": {
     "plugin": {
       "list": []
@@ -56,12 +57,6 @@
           "name": "home",
           "pathName": "pages/playlist/playlist",
           "query": "",
-          "scene": null
-        },
-        {
-          "name": "musiclist",
-          "pathName": "pages/musiclist/musiclist",
-          "query": "playlistId=5369003003",
           "scene": null
         }
       ]

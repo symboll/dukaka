@@ -1,2 +1,32 @@
-<!--pages/player/player.wxml-->
-<text>pages/player/player.wxml</text>
+
+<view class="play-container" style="background:url({{ picUrl }}) center/cover no-repeat"></view>
+<view class="play-mask"></view>
+
+
+<view class="play-info">
+  <view class="play-disc {{ isPlaying? 'play':'' }}">
+    <image 
+      class="player-img rotation {{ isPlaying? '': 'rotation_paused' }}" 
+      src="{{ picUrl }}"></image>
+  </view>
+
+  <view class="progress-bar">
+    <progress-bar />
+  </view>
+
+  <view class="control">
+    <text 
+      class="iconfont icon-shangyishoushangyige"
+      bind:tap="onPre"
+    ></text>
+    <text 
+      class="iconfont {{ isPlaying? 'icon-zanting1': 'icon-bofang1' }} "
+      bind:tap="togglePlaying"
+    ></text>
+    <text 
+      class="iconfont icon-xiayigexiayishou"
+      bind:tap="onNext"
+    ></text>
+  </view>
+
+</view>

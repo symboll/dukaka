@@ -31,6 +31,7 @@ Page({
           name: data.name
         }
       })
+      wx.setStorageSync('musiclist', data.tracks)
       wx.hideLoading()
     })
   },
