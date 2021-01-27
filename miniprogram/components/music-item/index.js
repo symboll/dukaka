@@ -1,3 +1,5 @@
+const app = getApp()
+
 // components/music-item/index.js
 Component({
   /**
@@ -16,6 +18,16 @@ Component({
     musicid: -1
   },
 
+  lifetimes: {
+    
+  },
+  pageLifetimes: {
+    show () {
+      this.setData({
+        musicid: Number(app.getPlayMusicId())
+      })
+    }
+  },
   /**
    * 组件的方法列表
    */

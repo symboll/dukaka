@@ -3,6 +3,7 @@ import { _dateFormat } from '../../utils/utils'
 let movableAreaWidth = 0
 let movableViewWidth = 0
 let currentSecond = 0
+let isMoving = false
 const backgroundAudioManager = wx.getBackgroundAudioManager()
 
 // components/progress-bar/index.js
@@ -12,7 +13,9 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    isSame : {
+      type: Boolean
+    }
   },
 
   /**
@@ -30,6 +33,9 @@ Component({
 
   lifetimes: {
     ready() {
+      if(this.properties.isSame && this.data.showTime.totalTime === '00:00') {
+        this._setTime()
+      }
       this._getMovableDis()
       this._bindBGMEvent()
     }
@@ -42,6 +48,7 @@ Component({
       if(event.detail.source === 'touch'){
         this.data.progress = event.detail.x / (movableAreaWidth - movableViewWidth) * 100
         this.data.movableDis = event.detail.x
+        isMoving = true
       }
     },
     onTouchEnd () {
@@ -55,6 +62,7 @@ Component({
       })
 
       backgroundAudioManager.seek(duration * this.data.progress / 100)
+      isMoving = false
     },
     _getMovableDis() {
       const query = this.createSelectorQuery()
@@ -69,6 +77,8 @@ Component({
     _bindBGMEvent () {
       backgroundAudioManager.onPlay(()=> {
         console.log('onPlay')
+        isMoving = false
+        this.triggerEvent('musicPlay')
       }) 
 
       backgroundAudioManager.onStop(()=> {
@@ -76,6 +86,7 @@ Component({
       }) 
       backgroundAudioManager.onPause(()=> {
         console.log('onPause')
+        this.triggerEvent('musicPause')
       }) 
       backgroundAudioManager.onWaiting(()=> {
         console.log('onWaiting')
@@ -87,23 +98,29 @@ Component({
       }) 
       backgroundAudioManager.onTimeUpdate(()=> {
         console.log('onTimeUpdate')
-        const currentTime = backgroundAudioManager.currentTime
-        const duration = backgroundAudioManager.duration
-        const formatCurrentTime =_dateFormat(currentTime)
-        let second = currentTime.toString().split('.')[0]
-        if(second !== currentSecond) {
-          this.setData({
-            ['showTime.currentTime']: `${formatCurrentTime.minute}:${formatCurrentTime.second}`,
-            movableDis: (movableAreaWidth - movableViewWidth) * currentTime / duration,
-            progress:  currentTime / duration * 100
-          })
-          currentSecond = second
+        if(!isMoving) {
+          const currentTime = backgroundAudioManager.currentTime
+          const duration = backgroundAudioManager.duration
+          const formatCurrentTime =_dateFormat(currentTime)
+          let second = currentTime.toString().split('.')[0]
+          if(second !== currentSecond) {
+            this.setData({
+              ['showTime.currentTime']: `${formatCurrentTime.minute}:${formatCurrentTime.second}`,
+              movableDis: (movableAreaWidth - movableViewWidth) * currentTime / duration,
+              progress:  currentTime / duration * 100
+            })
+            currentSecond = second
+
+            this.triggerEvent('timeUpdate', {
+              currentTime
+            })
+          }
         }
-        
       }) 
 
       backgroundAudioManager.onEnded(()=> {
         console.log('onEnded')
+        this.triggerEvent('musicEnd')
       }) 
       backgroundAudioManager.onError((err)=> {
         console.log(res.errMsg)

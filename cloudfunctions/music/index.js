@@ -39,7 +39,15 @@ exports.main = async (event, context) => {
   app.router('musicUrl', async(ctx, next) => {
     const res = await rp(`${BASE_URL}/song/url?id=${event.musicId}`).then(res => JSON.parse(res))
 
+    
+    ctx.body = res
+  })
+
+  app.router('musiclyric', async (ctx, next) => {
+    const res = await rp(`${BASE_URL}/lyric?id=${event.musicId}`).then(res => JSON.parse(res))
+
     console.log('res->', res)
+
     ctx.body = res
   })
 

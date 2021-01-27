@@ -14,7 +14,13 @@ function _supplement(second) {
   return second < 10 ? '0'+ second : second
 }
 
+function _timeToSecond (time='') {
+  const arr = time.split(':')
+  const second = Number(arr[0]) * 60 + Number(arr[1])
+  return second
+}
+
 export {
   _dateFormat,
-  _supplement
+  _timeToSecond
 }

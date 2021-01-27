@@ -1,9 +1,10 @@
 
 // 获取全局唯一的背景音频管理器
 const backgroundAudioManager = wx.getBackgroundAudioManager()
-
+const app = getApp()
 let playingIndex = -1
 let musicList = []
+
 // pages/player/player.js
 Page({
 
@@ -13,6 +14,9 @@ Page({
   data: {
     picUrl: "",
     isPlaying: false,
+    togglePlayDiscOrLyric: false,
+    lyric: '',
+    isSame: false
   },
 
   /**
@@ -29,7 +33,18 @@ Page({
 
   _loadMusciDetail (musicInfo) {
 
-    backgroundAudioManager.stop()
+    if(musicInfo.id == app.getPlayMusicId()) {
+      this.setData({
+        isSame: true
+      })
+    }else {
+      this.setData({
+        isSame: false
+      })
+    }
+    if(!this.data.isSame) {
+      backgroundAudioManager.stop()
+    }
 
     wx.setNavigationBarTitle({
       title: musicInfo.name,
@@ -38,6 +53,9 @@ Page({
       picUrl: musicInfo.al.picUrl,
       isPlaying: false
     })
+
+    app.setPlayMusicId(musicInfo.id)
+
     wx.showLoading({
       title: '歌曲加载中...',
     })
@@ -51,18 +69,39 @@ Page({
     }).then(res => {
       const data = res.result.data[0] || {}
 
-      backgroundAudioManager.src = data.url || ''
-      backgroundAudioManager.title = musicInfo?.name || ''
-      backgroundAudioManager.coverImgUrl = musicInfo?.al?.picUrl || ''
-      backgroundAudioManager.singer = musicInfo?.ar[0]?.name || ''
-      backgroundAudioManager.epname = musicInfo?.al?.name || ''
+      if(data.url == null || data.url == undefined){
+        wx.showToast({
+          title: '无权限播放...',
+        })
+        return 
+      }
+      if(!this.data.isSame){
+        backgroundAudioManager.src = data.url || ''
+        backgroundAudioManager.title = musicInfo?.name || ''
+        backgroundAudioManager.coverImgUrl = musicInfo?.al?.picUrl || ''
+        backgroundAudioManager.singer = musicInfo?.ar[0]?.name || ''
+        backgroundAudioManager.epname = musicInfo?.al?.name || ''
+      }
 
       this.setData({
         isPlaying: true
       })
       wx.hideLoading()
+
+      wx.cloud.callFunction({
+        name: 'music',
+        data: {
+          $url: 'musiclyric',
+          musicId: musicInfo.id
+        }
+      }).then(res => {
+        console.log('res--->', res)
+        let lyric  = res.result?.lrc?.lyric || '暂无歌词'
+        this.setData({ lyric })
+      })
     })
   },
+ 
   togglePlaying () {
     if(this.data.isPlaying) {
       backgroundAudioManager.pause()
@@ -86,6 +125,36 @@ Page({
       playingIndex = musicList.length - 1
     }
     this._loadMusciDetail(musicList[playingIndex])
+  },
+  onChange (event) {
+    const type = event.currentTarget.dataset.type
+    let toggle
+    switch (type) {
+      case 'lyric':
+        toggle = true
+        break;
+      case 'playdisc':
+        toggle = false
+        break;
+      default:
+        break;
+    }
+    this.setData({
+      togglePlayDiscOrLyric: toggle
+    })
+  },
+  timeUpdate(event){
+    this.selectComponent('.lyric').update(event.detail.currentTime)
+  },
+  musicPlay() {
+    this.setData({
+      isPlaying: true
+    })
+  },
+  musicPause() {
+    this.setData({
+      isPlaying: false
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
