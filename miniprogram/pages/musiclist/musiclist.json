@@ -1,5 +1,6 @@
 {
   "usingComponents": {
     "music-item": "/components/music-item/index"
-  }
+  },
+  "navigationBarTitleText": "音乐"
 }

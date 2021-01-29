@@ -24,5 +24,4 @@ App({
   getPlayMusicId(){
     return this.globalData.playingMusicId 
   }
-
 })

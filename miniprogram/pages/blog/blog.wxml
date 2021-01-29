@@ -1,2 +1,24 @@
-<!--pages/blog/blog.wxml-->
-<text>pages/blog/blog.wxml</text>
+<view class="contanier">
+  <view class="header">
+    <view class="publish-container" bind:tap="onPublish">
+      <i class="iconfont icon-fabu"></i>
+    </view>
+    <view class="search-container">
+      <search 
+        iconfont="iconfont"
+        icon-sousuo="icon-sousuo"
+      />
+    </view>
+  </view>
+
+  <bottom-modal 
+    bind:modalClose="onClose"
+    visible="{{ modalVisible }}" 
+  >
+    <!-- <view>hello</view> -->
+    <login
+      bind:login="onLogin"
+    ></login>
+  </bottom-modal>
+
+</view>

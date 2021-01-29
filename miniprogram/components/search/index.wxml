@@ -1,0 +1,10 @@
+<view class="container">
+  <i class="iconfont icon-sousuo icon-i"></i>
+  <input 
+    type="text" 
+    class="bar"
+    placeholder-class="placeholder-in-bar"
+    placeholder="{{ placeholder }}"
+  />
+  <button class="search-btn">搜索</button>
+</view>

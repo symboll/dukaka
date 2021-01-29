@@ -1,3 +1,9 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "search": "/components/search/index",
+    "bottom-modal": "/components/bottom-modal/index",
+    "login": "/components/login/index"
+  },
+  "navigationBarTitleText": "发现"
+  
 }
