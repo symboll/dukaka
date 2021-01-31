@@ -65,6 +65,12 @@
           "pathName": "pages/blog/blog",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "publish",
+          "pathName": "pages/blog-publish/blog-publish",
+          "query": "",
+          "scene": null
         }
       ]
     }
