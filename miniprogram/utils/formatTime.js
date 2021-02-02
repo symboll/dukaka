@@ -1,17 +1,19 @@
 function _formatTime (date) {
-  let fmt = 'yyyy-MM-dd hh:mm:ss'
-  const o = {
-    'M+': date.getMonth() +1,
-    'd+': date.getDate(),
-    'h+': date.getHours(),
-    'm+': date.getMinutes(),
-    's+': date.getSeconds()
+  if(Object.prototype.toString.call(date).slice(8, -1) !== 'Date'){
+    return ''
   }
-  // if(/(y+)/.test(fmt)) {
-
-  // }
-
-  console.log('date->',date)
+  const fmt = {
+    year: date.getFullYear(),
+    mounth: add(date.getMonth() +1),
+    day: add(date.getDate()),
+    hours: add(date.getHours()),
+    minutes: add(date.getMinutes()),
+    second: add(date.getSeconds())
+  }
+  function add (num) {
+    return String(num).length === 1 ? '0'+num : num
+  }
+  return `${fmt.year}-${fmt.mounth}-${fmt.day} ${fmt.hours}:${fmt.minutes}:${fmt.second}`
 }
 
 export default _formatTime

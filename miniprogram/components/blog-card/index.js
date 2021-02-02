@@ -14,13 +14,15 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    _createTime: ''
   },
 
   observers: {
     ['blog.createTime'] (value) {
       if(value){
-        _formatTime(new Date(value))
+        this.setData({
+          _createTime: _formatTime(new Date(value))
+        })
       }
     }
   },

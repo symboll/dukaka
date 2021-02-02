@@ -37,11 +37,16 @@ page{
 
 .blog-img{
   display: flex;
-  justify-content:space-between;
+  /* justify-content:space-between; */
   flex-wrap: wrap;
 }
 
 .blog-img .img{
   width:230rpx;
   height: 230rpx;
+  margin-bottom: 10rpx;
+}
+
+.margin_right{
+  margin-right: 10rpx;
 }
