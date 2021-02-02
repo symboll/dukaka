@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    modalVisible: false
+    modalVisible: false,
+    blogList: []
   },
   onPublish () {
     wx.getSetting({
@@ -19,12 +20,6 @@ Page({
           })
         }
       },
-      // fail (err) {
-      //   console.log('err',err)
-      // },
-      // complete (finish) {
-      //   console.log('finish', finish)
-      // }
     })
   },
   onClose () {
@@ -66,9 +61,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this._loadBlogList()
   },
-
+  _loadBlogList(start=0, count=10) {
+    wx.cloud.callFunction({
+      name: 'blog',
+      data: {
+        $url: 'list',
+        start,
+        count
+      }
+    }).then(res => {
+      this.setData({
+        blogList: this.data.blogList.concat(res.result.data)
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

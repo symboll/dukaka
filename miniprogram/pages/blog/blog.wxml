@@ -11,6 +11,16 @@
     </view>
   </view>
 
+  <view class="blog-list">
+    <block wx:for="{{ blogList }}" wx:key="_id">
+      <view class="blog-panel">
+        <blog-card blog="{{item}}"/>
+      </view>
+    </block>
+  </view>
+  
+
+  
   <bottom-modal 
     bind:modalClose="onClose"
     visible="{{ modalVisible }}" 
