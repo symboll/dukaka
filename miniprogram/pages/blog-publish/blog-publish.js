@@ -85,6 +85,7 @@ Page({
     }
     wx.showLoading({
       title: '发布中...',
+      mask: true
     })
     let images = this.data.images
     let arr = []
@@ -120,6 +121,10 @@ Page({
           title: '发布成功',
         })
         wx.navigateBack()
+        const pages = getCurrentPages()
+        const prevPage = pages[pages.length - 2]
+        prevPage.onPullDownRefresh()
+
       }).catch(err => {
         wx.hideLoading()
         wx.showToast({

@@ -23,6 +23,7 @@ page{
   flex:1;
 }
 .blog-box > view:nth-child(1) {
+  font-size: 32rpx;
   font-weight: bolder;
 }
 .blog-time{

@@ -36,6 +36,12 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    onPreviewImage(event) {
+      // console.log('event==>',event.target.dataset.index)
+      wx.previewImage({
+        urls: this.data.blog.img,
+        current:event.target.dataset.index
+      })
+    }
   }
 })

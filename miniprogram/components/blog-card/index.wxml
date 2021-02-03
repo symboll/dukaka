@@ -10,7 +10,13 @@
 
   <view class="blog-img">
     <block wx:for="{{ blog.img }}" wx:key="*this">
-      <image class="img"  src="{{item}}" mode="aspectFill"></image>
+      <image 
+        class="img" 
+        src="{{item}}" 
+        mode="aspectFill"
+        catch:tap="onPreviewImage"
+        data-index="{{index}}"
+      ></image>
     </block>
   </view>
 </view>

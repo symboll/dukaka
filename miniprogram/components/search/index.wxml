@@ -5,6 +5,9 @@
     class="bar"
     placeholder-class="placeholder-in-bar"
     placeholder="{{ placeholder }}"
+    bindinput="onInput"
   />
-  <button class="search-btn">搜索</button>
+  <button class="search-btn"
+    bind:tap="onSearch"
+  >搜索</button>
 </view>

@@ -1,3 +1,4 @@
+let keyword = ''
 // components/search/index.js
 Component({
   /**
@@ -25,6 +26,13 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    onInput(event) {
+      keyword = event.detail.value
+    },
+    onSearch () {
+      this.triggerEvent('search', {
+        keyword
+      })
+    }
   }
 })
