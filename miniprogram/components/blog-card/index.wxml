@@ -10,7 +10,7 @@
 
   <view class="blog-img">
     <block wx:for="{{ blog.img }}" wx:key="*this">
-      <image class="img {{ index%3 === 2 ? '':'margin_right' }}"  src="{{item}}" mode="aspectFill"></image>
+      <image class="img"  src="{{item}}" mode="aspectFill"></image>
     </block>
   </view>
 </view>

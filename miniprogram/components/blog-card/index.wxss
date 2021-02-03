@@ -47,6 +47,6 @@ page{
   margin-bottom: 10rpx;
 }
 
-.margin_right{
+.blog-img .img:not(:nth-child(3n)) {
   margin-right: 10rpx;
 }
