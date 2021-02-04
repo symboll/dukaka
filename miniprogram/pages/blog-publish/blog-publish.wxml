@@ -1,7 +1,7 @@
 <view class="container">
   <textarea 
     class="content" 
-    placeholder="分析新鲜事..."
+    placeholder="分享新鲜事..."
     bindinput="onInput"
     maxlength="140"
     auto-focus="true"

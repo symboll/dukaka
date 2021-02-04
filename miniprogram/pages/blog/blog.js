@@ -7,11 +7,25 @@ Page({
    */
   data: {
     modalVisible: false,
-    blogList: []
+    blogList: [],
+    state:'',
+    commitVisible: false,
+    commentContent:''
   },
   onPublish () {
+    this.setData({
+      state: 'publish'
+    })
+    this._setting()
+  },
+  onCommit () {
+    this.setData({
+      state: 'commit'
+    })
+    this._setting()
+  },
+  _setting () {
     wx.getSetting({
-      // withSubscriptions: true,
       success:(res) => {
         if(res.authSetting['scope.userInfo']){
           this._getUserInfo()
@@ -22,6 +36,9 @@ Page({
         }
       },
     })
+  },
+  onShare () {
+
   },
   onClose () {
     this.setData({
@@ -40,8 +57,24 @@ Page({
     }
   },
   _loginsuccess (userInfo) {
-    wx.navigateTo({
-      url: `../blog-publish/blog-publish?nickName=${userInfo.nickName}&avatarUrl=${userInfo.avatarUrl}`,
+    const state = this.data.state
+    switch (state) {
+      case 'publish':
+        wx.navigateTo({
+          url: `../blog-publish/blog-publish?nickName=${userInfo.nickName}&avatarUrl=${userInfo.avatarUrl}`,
+        })
+        break;
+      case 'commit': 
+        this.setData({
+          commitVisible: true
+        })
+        break;
+    }
+    
+  },
+  onCommitClose () {
+    this.setData({
+      commitVisible: false
     })
   },
   _loginFail () {
@@ -53,11 +86,11 @@ Page({
   _getUserInfo () {
     wx.getUserInfo({
       success: (res)=> {
-        // console.log('_getUserInfo', res.userInfo)
         this._loginsuccess(res.userInfo)
       }
     })
   },
+  
   /**
    * 生命周期函数--监听页面加载
    */

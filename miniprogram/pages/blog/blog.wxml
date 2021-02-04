@@ -20,6 +20,13 @@
           data-blog="{{ item }}"
           bind:tap="goComment"
         />
+        <blog-control 
+          iconfont="iconfont"
+          icon-pinglun="icon-pinglun"
+          icon-fenxiang="icon-fenxiang"
+          bind:commit="onCommit"
+          bind:share="onShare"
+        />
       </view>
     </block>
   </view>
@@ -27,13 +34,29 @@
 
   
   <bottom-modal 
-    bind:modalClose="onClose"
     visible="{{ modalVisible }}" 
+    bind:modalClose="onClose"
   >
-    <!-- <view>hello</view> -->
     <login
       bind:login="onLogin"
     ></login>
+  </bottom-modal>
+
+
+  <bottom-modal
+    visible="{{ commitVisible }}"
+    bind:modalClose="onCommitClose"
+  >
+  <view class="wrap">
+    <textarea 
+      name="content" 
+      class="comment-content" 
+      placeholder="写评论"
+      value="{{ commentContent }}"
+      fixed="true" 
+    ></textarea>
+    <button class="comment-btn" bind:tap="send">发送</button>
+  </view>
   </bottom-modal>
 
 </view>

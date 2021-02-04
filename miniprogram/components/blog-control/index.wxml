@@ -1,0 +1,14 @@
+<view class="control">
+  <view class="control-item comment" bind:tap="onComment">
+    <i class="iconfont icon-pinglun icon"></i>
+    <text>评论</text>
+  </view>
+
+  <view class="control-item share" bind:tap="onShare">
+    <i class="iconfont icon-fenxiang icon"></i>
+    <text>分享</text>
+  </view>
+</view>
+
+
+

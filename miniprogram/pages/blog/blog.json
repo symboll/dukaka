@@ -3,7 +3,8 @@
     "search": "/components/search/index",
     "bottom-modal": "/components/bottom-modal/index",
     "login": "/components/login/index",
-    "blog-card": "/components/blog-card/index"
+    "blog-card": "/components/blog-card/index",
+    "blog-control": "/components/blog-control/index"
   },
   "navigationBarTitleText": "发现",
   "enablePullDownRefresh": true

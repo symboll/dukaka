@@ -1,0 +1,28 @@
+.control{
+  display: flex;
+  align-items: center;
+  background: #fff;
+  /* height: 100%; */
+  width: 100%;
+}
+
+.control-item {
+  flex: 1;
+  text-align: center;
+  color: rgba(40, 47, 60, 0.8);
+  font-size: 26rpx;
+  height: 60rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.control-item .icon {
+  margin-right: 12rpx;
+  font-size: 32rpx;
+}
+
+.control-item text {
+  font-size: 32rpx;
+}
